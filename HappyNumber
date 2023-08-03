@@ -1,0 +1,66 @@
+// program to check a given number is a happy number or not
+
+import java.util.*;
+class Solution 
+{
+//function to check for happy number
+//function will return true if input is happy number
+//else it will return false
+    public boolean isHappy(int n)
+    {
+      //variable to store the sum of the squares of the digits
+        int sum=0;
+        int temp;
+      //while loop to find the sum of the squares of the digits
+        while(n > 0)
+        {
+          //taking modulus by 10 will give the last digit
+            temp = n % 10;
+          //finding its square and adding it to sum
+            sum += temp * temp;
+          //dividing by 10 to reduce the number
+            n = n / 10;
+            
+        }
+      //now sum will have the sum of the squares of the digits
+      //  assigning the new sum to the number
+        n = sum;
+      
+      // if the sum is 1 then return true
+      //as 1 means happy number
+        if(n == 1)
+            return true;
+        // if the sum is then return false
+        //as 4 square series numbers cannot make a happy number
+        else if(n == 4)
+            return false;
+        // repeat the process again if any other number
+        // a recurssive function call 
+        else
+            return isHappy(n);
+            
+    }
+}
+
+class IsHappyOrNot
+{
+    public static void main(String[] args)
+    {
+        int num;
+        Solution obj = new Solution();
+        System.out.println("enter a number");
+        Scanner se = new Scanner(System.in);
+        num = se.nextInt();
+        System.out.println(obj.isHappy(num));
+    }
+
+}
+
+    
+
+
+
+
+    
+
+

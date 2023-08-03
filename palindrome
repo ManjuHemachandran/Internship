@@ -1,0 +1,54 @@
+//program to check whether a given number is palindrome or not
+
+class Solution 
+{
+    //function to check given number is palindrome or not
+    //funtion will return true if the number is palindrome
+    //else it will return false
+    public boolean isPalindrome(int x) 
+    {
+        //a temporary variable to store the original number
+        int temp = x;
+        //variable to store the reversed number
+        int reverseNum = 0;
+        int r;
+
+        //while loop to reverse the number
+        while(x > 0)
+        {
+            //by doing modulus of the number by 10 we can get the last digit
+            r = x % 10;
+
+            //multiplication by 10 will increase the number by 10's place
+            //last digit is then added 
+            reverseNum = (reverseNum * 10) + r;
+
+            //number is divided by 10 to remove the last digit
+            x = x / 10;
+            
+        }
+
+        //checking the original number and reversed number are equal
+        if( temp == reverseNum)
+            return true;
+        else
+            return false;
+
+    }
+
+    public static void main(String[] args)
+    {
+        int num;
+        //creating an object of the class
+        Solution obj = new Solution();
+        System.out.println("enter a number");
+        //Scanner object to get input from user
+        Scanner se = new Scanner(System.in);
+        num = se.nextInt();
+
+        //variable to store the value returned by the function
+        boolean b = obj.isPalindrome(num);
+        System.out.println(b);
+    }
+        
+}

@@ -1,0 +1,120 @@
+//DISTINCT PRIME FACTORS OF PRODUCT OF ARRAY
+public class ArrayProductPrime
+{
+   //function to check for prime number
+    static  boolean isPrime(int num)
+    {
+        if(num<=1)
+        {
+            return false;
+        }
+       for(int i=2;i<=num/2;i++)
+       {
+           if((num%i)==0)
+               return  false;
+       }
+       return true;
+    }
+
+//function to print prime factors
+    public static int distinctPrimeFactors(int[] nums)
+    {
+        //hashset to store the prime values
+        HashSet<Integer> m = new HashSet<Integer>();
+
+//iterating through every number in array        
+        for(Integer num : nums)
+        {
+//we find prime factors of every element instead of finding it for the product
+            for(int i=2; i <= num; i++)
+            {
+            //checking for prime number and if it divides the number in array..it is added into the set
+                if(isPrime(i))
+                {
+                    if(num % i == 0)
+                        m.add(i);
+                }
+            }
+            
+        }
+//returning the size of the set
+        return m.size();
+
+    }
+
+    public static void main(String[] args)
+    {
+        int[] arr = {1,2,3,4,5,6};
+        System.out.println(distinctPrimeFactors(arr));
+    }
+}
+
+
+//MAXIMUM VALUE OF STRING IN AN ARRAY
+
+class MaxValueOfString
+{
+    public static void main(String[] args)
+    {
+        String[] strs={"1","00"};
+        System.out.println(returnMaxValue(strs));
+
+    }
+//function to check a value of string is a number or not..and it returns true if string is a number
+    public static boolean isNumber(String s)
+    {
+        boolean numeric = true;
+
+            try 
+            {
+                Integer num = Integer.parseInt(s);
+            } 
+            catch (NumberFormatException e) 
+            {
+                numeric = false;
+            }
+        return numeric;
+    }
+//function will iterate through the array 
+//if string is a number..value of the number will be taken
+//else the length of the string will be taken
+//then the values will be compared and assigned to max
+    public static int returnMaxValue(String[] strs)
+    {
+        int max;
+        String str;
+        boolean n;
+        int len = strs.length;
+        
+//1st elemant of array is fetched and assigned as max value
+        n = isNumber(strs[0]);
+        if(n)
+            max =Integer.parseInt(strs[0]);
+        else
+            max = strs[0].length();
+
+  //next we iterate through the array and comapre the values
+        for(int i=1; i<len; i++)
+        {
+            n = isNumber(strs[i]);
+//if string is a number value will be assigned and compared with max
+            if(n)
+            {
+                if(Integer.parseInt(strs[i]) >= max)
+                    max = Integer.parseInt(strs[i]);
+            }
+
+//else if the string is alphanumeric then length will be assigned and comp[ared with max
+            else
+            {
+                if(strs[i].length() > max)
+                    max = strs[i].length();
+
+            }
+                
+        }
+  // max value is returned      
+        return max;
+
+    }
+}

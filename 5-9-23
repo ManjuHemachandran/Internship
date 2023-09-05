@@ -1,0 +1,90 @@
+//SUM OF NUMBER AND ITS REVERSE
+
+class Solution 
+{
+//function will check for all nuumbers till the given number
+    public boolean sumOfNumberAndReverse(int num) 
+    {
+        boolean b = false;
+        if (num == 0)
+            return true;
+
+//we are taking a number and finding its reverse by converrting it to a string and reversing it
+        for(int i=1; i<num; i++)
+        {
+  //converting the number to string and assingning it to string builder class
+            StringBuilder s = new StringBuilder(Integer.toString(i));
+            
+//finding its reverse and converting it to string..so that we can convert it to number
+            String srev = s.reverse().toString();
+            
+// if the sum is equal to num return true
+            if(num == (i + Integer.parseInt(srev)))
+                b = true;
+    
+        }
+        return b;
+
+      }
+}
+
+
+
+//MINIMUM NUMBER OF OPERATIONS TO MAKE ALL ARRAY ELEMENTS EQUUAL TO 1
+
+class Solution 
+{
+//function to find gcd of 2 numbers
+    private int gcd(int a,int b)
+    {
+        if(a == 0)
+            return b;
+        return gcd(b % a,a);
+    }
+
+
+    public int minOperations(int[] nums) 
+    {
+        int n = nums.length;
+        int count = 0;
+        int gcd = 0;
+
+//if we have atleast one number as 1 in the array..we can convert the array to 1
+//we iterate through the array and count for the number of 1's
+//we also find the gcd of all numbers in the array
+        for(int i : nums)
+        {
+            if(i == 1)
+            {
+                count++;
+            }
+            gcd = gcd(gcd,i);
+        }
+//if gcd of all the numbers is not equal to 1 then we cannot convert the array to 1
+        if(gcd != 1){
+            return -1;
+        }
+
+//length of the array - no. of 1's present in the array will give the miminum number of steps required...if we have number 1 in the array
+        if(count > 0){
+            return n - count;
+        }
+
+        int ans = Integer.MAX_VALUE;
+
+//we iterate through the array to find a minimum sub array for that gcd could be 1
+        for(int i = 0;i < n;i++){
+            int num = nums[i];
+            for(int j = i + 1;j < n;j++){
+                num = gcd(num,nums[j]);
+//we are finding the size of the sub array
+                if(num == 1){
+                    ans = Math.min(ans,j - i);
+                    break;
+                }
+            }
+        }
+//size of the array - 1 + minimum size of subarray with gcd value 1 will give the result
+        return n - 1 + ans;
+    }
+}
